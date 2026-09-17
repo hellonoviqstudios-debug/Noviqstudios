@@ -130,8 +130,25 @@
       if(step===1){var n=pform.name.value.trim(),em=pform.email.value.trim();if(!n)return warn('Please add your name.',pform.name);if(!em||em.indexOf('@')<0)return warn('Please add a working email address so we can send the proposal.',pform.email);show(2,true)}
       else if(step===2){show(3,true)}
       else if(step===3){var f=pform;if(!f.consent.checked)return warn('Please tick the consent checkbox so we can use your details to prepare the proposal.',f.consent);
-        var body='Name: '+f.name.value+'\nEmail: '+f.email.value+'\nBusiness: '+f.business.value+'\nCurrent website: '+f.website.value+'\nNeeds: '+needs()+'\nPages: '+f.pages.value+'\nLaunch: '+f.timeline.value+'\nMeeting: '+f.meet.value+'\n\n'+f.message.value;
-        window.location.href='mailto:hellonoviqstudios@gmail.com?subject='+encodeURIComponent('Proposal request — '+(f.business.value||f.name.value))+'&body='+encodeURIComponent(body);show(4,true)}
+        var mailBody='Name: '+f.name.value+'\nEmail: '+f.email.value+'\nBusiness: '+f.business.value+'\nCurrent website: '+f.website.value+'\nNeeds: '+needs()+'\nPages: '+f.pages.value+'\nLaunch: '+f.timeline.value+'\nMeeting: '+f.meet.value+'\n\n'+f.message.value;
+        var mailFallback=function(){
+          window.location.href='mailto:hellonoviqstudios@gmail.com?subject='+encodeURIComponent('Proposal request — '+(f.business.value||f.name.value))+'&body='+encodeURIComponent(mailBody);
+          var t=$('sent-title'),b=$('sent-body');
+          if(t)t.textContent='Your email app should be open.';
+          if(b)b.innerHTML='Send the message as it is and you\'ll have a written proposal within two business days.<br>If nothing opened, write to <a href="mailto:hellonoviqstudios@gmail.com" style="color:var(--ink)">hellonoviqstudios@gmail.com</a>.';
+          show(4,true);
+        };
+        next.disabled=true;next.querySelector('span').textContent='Sending…';
+        var fd=new FormData(f);fd.set('needs',needs());fd.set('_subject','Proposal request — '+(f.business.value||f.name.value));
+        fetch('https://formspree.io/f/xoevqnoz',{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){
+          next.disabled=false;
+          if(r.ok){
+            var t=$('sent-title'),b=$('sent-body');
+            if(t)t.textContent='Your request is on its way.';
+            if(b)b.innerHTML='You\'ll have a written proposal within two business days.<br>Questions in the meantime? Write to <a href="mailto:hellonoviqstudios@gmail.com" style="color:var(--ink)">hellonoviqstudios@gmail.com</a>.';
+            show(4,true);
+          }else mailFallback();
+        }).catch(function(){next.disabled=false;mailFallback()})}
     });
     prev.addEventListener('click',function(){if(step>1)show(step-1,true)});
     pform.addEventListener('submit',function(e){e.preventDefault();next.click()});

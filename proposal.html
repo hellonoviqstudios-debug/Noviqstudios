@@ -37,6 +37,7 @@
           </dl>
         </div>
         <form class="pform r d1" id="pform" novalidate>
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="bar"><i id="pbar"></i></div>
           <div class="panes">
             <div class="pane on" data-step="1">
@@ -69,7 +70,7 @@
               <div class="field full consent"><label class="consent-row"><input type="checkbox" id="f-consent" name="consent" required><span>I agree that Noviq Studios can use the details above to prepare my proposal, as described in the <a href="privacy.html">Privacy Policy</a>.</span></label></div>
             </div>
             <div class="pane" data-step="4">
-              <div class="sent"><div class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div><h3>Your email app should be open.</h3><p>Send the message as it is and you'll have a written proposal within two business days.<br>If nothing opened, write to <a href="mailto:hellonoviqstudios@gmail.com" style="color:var(--ink)">hellonoviqstudios@gmail.com</a>.</p></div>
+              <div class="sent"><div class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div><h3 id="sent-title">Your request is on its way.</h3><p id="sent-body">You'll have a written proposal within two business days.<br>Questions in the meantime? Write to <a href="mailto:hellonoviqstudios@gmail.com" style="color:var(--ink)">hellonoviqstudios@gmail.com</a>.</p></div>
             </div>
             <div class="toast" id="toast" role="status" style="margin-top:18px"></div>
           </div>
@@ -93,7 +94,7 @@
     </div>
     <div class="legal"><span>© <span id="yr">2026</span> Noviq Studios · Netherlands</span><span>Websites that work.</span></div>
     <div class="legal-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a><a href="cookies.html">Cookie Policy</a><a href="refund.html">Refund &amp; Cancellation Policy</a></div>
-    <p class="biz-status">Noviq Studios is operated by [Your full legal name] as a sole proprietorship based in the Netherlands. KvK registration in progress — trade register and VAT numbers will be published here once issued.</p>
+    <p class="biz-status">Noviq Studios is operated by [Your full legal name] as a sole proprietorship based in the Netherlands. KvK 42087386.</p>
   </div>
 </footer>
 <button class="chat-fab" id="chat-fab" aria-label="Chat with Noviq" aria-expanded="false" aria-controls="chat">
