@@ -103,7 +103,7 @@
     var step=1,panes=pform.querySelectorAll('.pane'),bar=$('pbar'),prev=$('pprev'),next=$('pnext'),hint=$('phint'),list=$('step-list'),toast=$('toast'),review=$('review');
     function show(n,scroll){step=n;panes.forEach(function(p){p.classList.toggle('on',Number(p.dataset.step)===n)});
       bar.style.width=(n>=4?100:n*33.3)+'%';
-      list.querySelectorAll('li').forEach(function(li,i){li.classList.toggle('cur',i+1===n);li.classList.toggle('done',i+1<n)});
+      list.querySelectorAll('li').forEach(function(li,i){li.classList.toggle('step-cur',i+1===n);li.classList.toggle('done',i+1<n)});
       prev.style.visibility=(n===1||n===4)?'hidden':'visible';
       if(n===4){next.style.display='none';hint.textContent='Sent'}else{next.style.display='';hint.textContent='Step '+n+' of 3';next.querySelector('span').textContent=n===3?'Send request':'Continue'}
       toast.classList.remove('show');
